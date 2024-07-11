@@ -6,6 +6,7 @@
 //! > The end doesn't scare us  
 //! > When will this cease?  
 //! > The warheads will all rust in peace"  
+//! >  
 //! > -- Megadeth, Rust in Peace... Polaris (1990)
 //!
 //! Minimalistic Rust implementation of the main staging protocols used by the Metasploit Framework.
