@@ -44,7 +44,7 @@ pub fn usage(prog: &str) {
 fn payload_recv(stream: &TcpStream) -> Result<Vec<u8>, Box<dyn Error>> {
     let mut reader = BufReader::new(stream);
 
-    // Read the 4-byte payload length and allocate payload buffer
+    // Read the 4-byte payload length and allocate the payload buffer
     let mut tmp = [0u8; 4];
     reader.read_exact(&mut tmp)?;
     let length = u32::from_le_bytes(tmp);
