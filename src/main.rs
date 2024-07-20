@@ -95,7 +95,7 @@ fn main() {
     match run(addr) {
         Ok(()) => (),
         Err(err) => {
-            eprintln!("Error: {err}");
+            eprintln!("[!] Error: {err}");
             process::exit(1);
         }
     }

