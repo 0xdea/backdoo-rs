@@ -95,8 +95,17 @@ fn main() {
     match run(addr) {
         Ok(()) => (),
         Err(err) => {
-            eprintln!("Error: {}", err);
+            eprintln!("Error: {err}");
             process::exit(1);
         }
     }
+}
+
+/// Print usage information
+fn usage(prog: &str) {
+    println!("Usage:");
+    println!("{prog} [:port | host:port]");
+    println!("\nExamples:");
+    println!("{prog} :4444");
+    println!("{prog} 192.168.0.66:4444");
 }

