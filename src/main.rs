@@ -92,7 +92,7 @@ fn main() {
     }
 
     // Let's do it
-    match run(addr) {
+    match run(&addr) {
         Ok(()) => (),
         Err(err) => {
             eprintln!("[!] Error: {err}");
