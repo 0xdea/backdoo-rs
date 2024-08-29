@@ -77,4 +77,8 @@ msf > exploit
 
 ## Tested on
 
+* Microsoft Windows 10
 * Microsoft Windows 11
+* Microsoft Windows Server 2016
+* Microsoft Windows Server 2019
+* Microsoft Windows Server 2022

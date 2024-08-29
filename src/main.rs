@@ -61,7 +61,11 @@
 //! * windows/x64/meterpreter/bind_tcp
 //!
 //! # Tested on
+//! * Microsoft Windows 10
 //! * Microsoft Windows 11
+//! * Microsoft Windows Server 2016
+//! * Microsoft Windows Server 2019
+//! * Microsoft Windows Server 2022
 //!
 
 use std::env;
