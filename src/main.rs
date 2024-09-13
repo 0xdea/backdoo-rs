@@ -57,8 +57,8 @@
 //! ```
 //!
 //! # Supported payloads
-//! * windows/x64/meterpreter/reverse_tcp
-//! * windows/x64/meterpreter/bind_tcp
+//! * `windows/x64/meterpreter/reverse_tcp`
+//! * `windows/x64/meterpreter/bind_tcp`
 //!
 //! # Tested on
 //! * Microsoft Windows 10
@@ -72,6 +72,7 @@ use std::env;
 use std::process;
 
 mod backdoo;
+#[allow(clippy::wildcard_imports)]
 use backdoo::*;
 
 fn main() {

