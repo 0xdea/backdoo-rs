@@ -72,7 +72,6 @@ use std::env;
 use std::process;
 
 mod backdoo;
-#[allow(clippy::wildcard_imports)]
 use backdoo::*;
 
 fn main() {

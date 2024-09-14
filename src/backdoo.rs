@@ -5,7 +5,6 @@ use std::net::{TcpListener, TcpStream};
 use std::os::windows::io::AsRawSocket;
 use std::{mem, ptr};
 
-#[allow(clippy::wildcard_imports)]
 use windows::Win32::System::{Memory::*, Threading::*};
 
 /// Implement the main logic of the program

@@ -19,10 +19,12 @@ features = [
 ]
 
 [lints.clippy]
-all = "warn"
-pedantic = "warn"
-nursery = "warn"
-cargo = "warn"
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+cargo = { level = "warn", priority = -1 }
+
+wildcard_imports = "allow"
 
 [profile.release]
 # see https://github.com/johnthagen/min-sized-rust
