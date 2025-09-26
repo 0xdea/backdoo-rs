@@ -18,7 +18,7 @@ Start an `exploit/multi/handler` instance on the attack box configured to handle
 payloads, run `backdoo-rs.exe` on the target Windows system, and enjoy your session!
 
 Blog post:  
-https://security.humanativaspa.it/learning-rust-for-fun-and-backdoo-rs
+https://hnsecurity.it/blog/learning-rust-for-fun-and-backdoo-rs
 
 See also:  
 https://github.com/0xdea/tactical-exploitation/blob/master/letmein.py  
