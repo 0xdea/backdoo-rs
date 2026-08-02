@@ -17,7 +17,7 @@ Minimalistic Rust implementation of the main staging protocols used by the Metas
 Start an `exploit/multi/handler` instance on the attack box configured to handle one of the supported
 payloads, run `backdoo-rs.exe` on the target Windows system, and enjoy your session!
 
-## Blog post
+## Article
 
 * <https://hnsecurity.it/blog/learning-rust-for-fun-and-backdoo-rs>
 
